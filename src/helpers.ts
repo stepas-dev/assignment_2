@@ -6,6 +6,10 @@ export const findOptimalMeals = (
   minProtein: number,
   marginOfError: number,
 ): IMeal[] => {
+  if (!meals.length) {
+    return [];
+  }
+
   if (Math.abs(targetCalories) <= marginOfError && minProtein <= 0) {
     return [];
   }
