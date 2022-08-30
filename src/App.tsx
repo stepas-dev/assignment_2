@@ -111,16 +111,6 @@ const App = () => {
     setEnabledMeals(newEnabledMeals);
   };
 
-  const checkboxesUI = mealTypes.map(mealType => (
-    <div key={mealType}>
-      <Checkbox
-        label={mealType}
-        isChecked={enabledMeals.includes(mealType)}
-        onChange={() => handleCheckMealType(mealType)}
-      />
-    </div>
-  ));
-
   const isPlanEmpty = Object.values(plan).every(meals => !meals.length);
 
   let planUI;
@@ -141,37 +131,41 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <div>
       <div>
-        <div>
-          <div>
-            <div>Enter target calories count</div>
-            <input
-              type="number"
-              min={100}
-              value={calories}
-              onChange={handleChangeCaloriesCount}
-            />
-          </div>
-          <div>
-            <div>Enter min protein</div>
-            <input
-              type="number"
-              min={0}
-              value={minProtein}
-              onChange={handleChangeMinProtein}
-            />
-          </div>
-          {checkboxesUI}
-          <button
-            onClick={handleCalculatePlanPress}
-            disabled={!enabledMeals.length}
-          >
-            Calculate plan
-          </button>
-        </div>
-        {planUI}
+        <div>Enter target calories count</div>
+        <input
+          type="number"
+          min={100}
+          value={calories}
+          onChange={handleChangeCaloriesCount}
+        />
       </div>
+      <div>
+        <div>Enter min protein</div>
+        <input
+          type="number"
+          min={0}
+          value={minProtein}
+          onChange={handleChangeMinProtein}
+        />
+      </div>
+      {mealTypes.map(mealType => (
+        <div key={mealType}>
+          <Checkbox
+            label={mealType}
+            isChecked={enabledMeals.includes(mealType)}
+            onChange={() => handleCheckMealType(mealType)}
+          />
+        </div>
+      ))}
+      <button
+        onClick={handleCalculatePlanPress}
+        disabled={!enabledMeals.length}
+      >
+        Calculate plan
+      </button>
+      {planUI}
     </div>
   );
 };

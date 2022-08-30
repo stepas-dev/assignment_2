@@ -15,7 +15,7 @@ export const findOptimalMeals = (
 
     if (meal.calories < targetCalories) {
       const remainingTargetCalories = targetCalories - meal.calories;
-      const remainingMeals = meals.slice(i);
+      const remainingMeals = meals.slice(i + 1);
       const remainingMinProtein = minProtein - meal.protein;
 
       if (
